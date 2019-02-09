@@ -27,13 +27,20 @@ class Club():
 
     def recruit_member(self, person):
         # your code goes here!
-        self.members.append(person) 
+        for m in self.members:
+            if m.name == person.name:
+                return False
+        self.members.append(person)
+        return True
+        
+
                
 
 
     def print_member_list(self):
         # your code goes here!
         total_age =0
+        avrage_age =0
         for member in self.members:
             total_age += member.age
             avrage_age = total_age / len(self.members) 

@@ -12,23 +12,31 @@ def introduction():
 
 def options():
     # your code goes here!
-    option =input("wold you like to : \n 1- create a new club \n or : \n 2- Browse and join clubs \n or : \n 3- View existing clubs \n or : \n 4- Display members of a club \n or : \n -1 close application \n")
-    if option == '1':
-        create_club()
-    elif option == '2':
-        join_clubs()
-    elif option == '3':
-        view_clubs()
-    elif option == '4':
-        view_club_members()
-    elif option == '-1': 
-        return
+    
+    while True :
+        option =input("wold you like to : \n 1- create a new club \n or : \n 2- Browse and join clubs \n or : \n 3- View existing clubs \n or : \n 4- Display members of a club \n or : \n -1 close application \n")
+        if option == '1':
+            create_club()
+        elif option == '2':
+            join_clubs()
+        elif option == '3':
+            view_clubs()
+        elif option == '4':
+            view_club_members()
+        elif option == '-1': 
+            quit()
+        #return
+        else :
+            option = input('invalid option enter again ')
 
 def create_club():
     # your code goes here!
     club_name =input("Pick a name for you asesome new club:")
     clube_description = input("what is your club about?")
     club = Club(club_name,clube_description)
+    club.recruit_member(myself)
+    club.assign_president(myself)
+    clubs.append(club)
     print("Enter the numbers of the people you would like to recruit to your new club (-1 to stop :)")
     for i , p in enumerate(population):
         print ("[%s] %s" % (i+1,p.name))
@@ -75,8 +83,10 @@ def join_clubs():
         for club in clubs:
             if club.name == club_name:
                 flag = True
-                print ("%s just joined %s" % (myself.name ,club.name))
-                club.recruit_member(myself)
+                if club.recruit_member(myself):
+                    print ("%s just joined %s" % (myself.name ,club.name))
+                else:
+                    print("already exist")
                    
 
     
